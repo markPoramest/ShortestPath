@@ -104,7 +104,7 @@ public class Main {
                                       int[] parents,int end,String[] bus,Route route)
     {
         int nVertices = distances.length;
-        System.out.print("Vertex\t Distance\tPath");
+        //System.out.print("Vertex\t Distance\tPath");
 
         for (int vertexIndex = 0;
              vertexIndex < nVertices;

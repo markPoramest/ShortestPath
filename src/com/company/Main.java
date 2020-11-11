@@ -154,9 +154,14 @@ public class Main {
         route.start = in.nextInt();
         route.dest = in.nextInt();
         dijkstra(adjacencyMatrix, route.start,route.dest , bus, route);
-        System.out.println("Start : "+route.start);
-        System.out.println("Destination : "+ route.dest);
+        System.out.println("Start : "+bus[route.start]);
+        System.out.println("Destination : "+ bus[route.dest]);
         System.out.println("Distant :" +route.distant);
-        route.path.forEach(System.out::println);
+        for(int i=0;i<route.path.size();i++){
+            System.out.print(route.path.get(i));
+            if(i+1<route.path.size()){
+                System.out.print(" -> ");
+            }
+        }
     }
 }

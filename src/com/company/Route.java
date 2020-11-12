@@ -7,4 +7,5 @@ class Route{
     int dest;
     int distant;
     ArrayList<String> path = new ArrayList<>();
+    ArrayList<Integer> busLine = new ArrayList<>();
 }

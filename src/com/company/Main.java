@@ -68,6 +68,7 @@ public class Main {
                 {
                     nearestVertex = vertexIndex;
                     shortestDistance = shortestDistances[vertexIndex];
+
                 }
             }
 
@@ -89,7 +90,9 @@ public class Main {
                     parents[vertexIndex] = nearestVertex;
                     shortestDistances[vertexIndex] = shortestDistance +
                             edgeDistance;
+
                 }
+
             }
         }
 
@@ -116,6 +119,7 @@ public class Main {
                 //System.out.print(vertexIndex + " \t\t ");
                 //System.out.print(distances[vertexIndex] + "\t\t");
                 route.distant = distances[vertexIndex];
+
                 printPath(vertexIndex, parents,bus,route);
             }
         }
@@ -149,6 +153,16 @@ public class Main {
                 { 0, 0, 0, 14, 0, 2, 0, 1, 6 },
                 { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
                 { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
+        int [][] busLine = { { 0, 515, 0, 0, 0, 0, 0, 509, 0 },
+                { 515, 0, 36, 0, 0, 0, 0, 516, 0 },
+                { 0, 36, 0, 256, 0, 198, 0, 0, 124 },
+                { 0, 0, 256, 0, 34, 189, 0, 0, 0 },
+                { 0, 0, 0, 34, 0, 10, 0, 0, 0 },
+                { 0, 0, 198, 0, 10, 0, 80, 0, 0 },
+                { 0, 0, 0, 189, 0, 80, 0, 70, 101 },
+                { 509, 516, 0, 0, 0, 0, 70, 0, 123 },
+                { 0, 0, 124, 0, 0, 0, 101, 123, 0 } };
+
         String[] bus = {"อนุสาวรีย์ชัยสมรภูมิ" , "สะพานควาย" , "จตุจักร" , "ห้าแยกลาดพร้าว" , "มหาวิทยาลัยสวนดุสิต" , "พระราชวังสวนดุสิต" , "ตั้งหั้วเส็ง" , "มหาวิทยาลัยเกษตรศาสตร์" , "กรมป่าไม้"};
         Route route = new Route();
         route.start = in.nextInt();
@@ -159,9 +173,26 @@ public class Main {
         System.out.println("Distant :" +route.distant);
         for(int i=0;i<route.path.size();i++){
             System.out.print(route.path.get(i));
+            if(i!=0) {
+                int indexDest = -1;
+                int indexStart = -1;
+                for (int j = 0; j < bus.length; j++) {
+                    if (route.path.get(i).equals(bus[j])) {
+                        indexDest = j;
+                    }
+                    if (route.path.get(i-1).equals(bus[j])) {
+                        indexStart = j;
+                    }
+                }
+                route.busLine.add(busLine[indexStart][indexDest]);
+            }
             if(i+1<route.path.size()){
                 System.out.print(" -> ");
             }
+            else{
+                System.out.println();
+            }
         }
+        route.busLine.forEach(x-> System.out.print("รถเมล์สาย "+x+" "));
     }
 }
